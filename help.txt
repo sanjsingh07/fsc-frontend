@@ -1,0 +1,16 @@
+import React, {Component} from "react";
+import CreateProduct from "./createProduct/createProduct";
+
+class App extends Component {
+  render(){
+    return(
+      <div className="App">
+      
+        <CreateProduct/>
+      </div>
+    )
+
+  }
+}
+
+export default App
