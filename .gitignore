@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/hyperledger/network/fabric-network/system-genesis-block/
 
 # testing
 /coverage
