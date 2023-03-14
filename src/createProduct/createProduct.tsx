@@ -13,14 +13,14 @@ function CreateProduct() {
     category:"",
     componentProductIds:"",
     expirationDate:"",
-    id:"",
+    id: 0,
     locationData:"",
     misc:"",
     name:"",
     placeOfOrigin:"",
     productionDate:"",
     unitPrice:"",
-    unitQuantity:"",
+    unitQuantity:0,
     unitQuantityType:"",
     variety:"",
     componentProducts:"",
@@ -53,7 +53,7 @@ function CreateProduct() {
      const jsonVal = JSON.parse(jsonObject)
      
 
-     setFormVal(newRecord);
+    //  setFormVal(newRecord);
 
     //  Axios.post(url, {
 
@@ -61,17 +61,19 @@ function CreateProduct() {
 
     // JSON constant data....
 
+    let previousData;
+
     let json =  {
-      barcode: "1234567890",
-      batchQuantity: 1000,
-      category: "Fruits",
-      componentProductIds: [],
-      expirationDate: "2022-06-24T18:25:43.511Z",
-      id: "1002",
+      barcode: formVal.barcode,
+      batchQuantity: formVal.batchQuantity,
+      category: formVal.category,
+      componentProductIds: [] || formVal.componentProductIds,
+      expirationDate: "2022-06-24T18:25:43.511Z" || formVal.expirationDate.toString(),
+      id: formVal.id,
       locationData: {
           current: {
-              arrivalDate: "2021-07-07T01:11:18.409Z",
-              location: "san fransisco, CA"
+              arrivalDate: new Date().getTime().toString(),
+              location: formVal.locationData
           },
           previous: [
               {
@@ -80,15 +82,15 @@ function CreateProduct() {
               }
           ]
       },
-      misc: "{}",
-      name: "Apples",
-      placeOfOrigin: "Markham, ON, Canada",
-      productionDate: "2021-06-24T18:25:43.511Z",
-      unitPrice: "$5.00",
-      unitQuantity: 300,
-      unitQuantityType: "mg",
-      variety: null,
-      componentProducts: []
+      misc: "{}" || formVal.misc,
+      name: formVal.name,
+      placeOfOrigin: formVal.placeOfOrigin,
+      productionDate: "2021-06-24T18:25:43.511Z" || formVal.productionDate,
+      unitPrice: "$5.00" || formVal.unitPrice,
+      unitQuantity:  formVal.unitQuantity,
+      unitQuantityType: formVal.unitQuantityType,
+      variety: null || formVal.variety,
+      componentProducts: [] || formVal.componentProducts
   }
 
   let jsonn = JSON.stringify(json);
@@ -97,13 +99,7 @@ function CreateProduct() {
   console.log('step-1')
   console.log("Json data:  ", jsonn);
 
-    addProduct(jsonn);
-
-    console.log("json of string: ", jsonObject)
-    console.log("json value: ", jsonVal)
-
-     
-
+  addProduct(jsonn);
 
 
   }
