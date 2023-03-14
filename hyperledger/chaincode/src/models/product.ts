@@ -48,6 +48,6 @@ export class Product {
     @Property('locationData', 'ProductLocationData')
     locationData: ProductLocationData;
 
-    @Property()
-    otherProductInvolved: string;
+    // @Property()
+    // otherProductInvolved: string;
 }

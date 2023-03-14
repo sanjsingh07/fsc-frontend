@@ -1,26 +1,15 @@
 import React, { useEffect } from 'react';
 import Axios from 'axios';
 import {useParams} from 'react-router-dom' 
+import data from '../common/data.json';
 
 
 import {getProductDetailsById} from '../services/api';
 
 function GetProductDetails() {
 
- 
-
-
-
-
-
-
-
-
-  const handleSubmit = () => {
-    
-
-
-
+  const handleSubmit = (id:any) => {
+    getProductDetailsById(id);
 
   }
 
@@ -30,16 +19,23 @@ function GetProductDetails() {
     useEffect(()=>{
       getProductDetailsById(`id`);
 
-
-
-
-
-
-    })
+  },[]);
   }
   
   return (
     <div className="sample">
+      {
+        data.map((record: any) =>{
+          console.log('step1')
+          return(
+            record.barcode,
+            record.batchQuantity
+            
+          )
+
+
+        })
+      }
 
       <form action="" onSubmit={handleSubmit}>
         <div className='div1'>

@@ -1574,6 +1574,13 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
+"@reactivex/rxjs@5.5.3":
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/@reactivex/rxjs/-/rxjs-5.5.3.tgz#f307c50db3fd17a89a05be229c815e4a5fdf1a85"
+  integrity sha512-6EBDrb2D2XD+iciVzo5VMw5dHqI8pEFQHwVyZkZy1ePmfuCOqZ0I9YRMPNcgIfa/guQIi4zBZTnBEpWmSStddw==
+  dependencies:
+    symbol-observable "^1.0.1"
+
 "@remix-run/router@1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.4.0.tgz#74935d538e4df8893e47831a7aea362f295bcd39"
@@ -8412,6 +8419,11 @@ svgo@^2.7.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
+
+symbol-observable@^1.0.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 symbol-tree@^3.2.4:
   version "3.2.4"

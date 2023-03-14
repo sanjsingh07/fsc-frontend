@@ -91,12 +91,13 @@ function CreateProduct() {
       componentProducts: []
   }
 
-  // let jsonn = JSON.stringify(json);
-  // let jsonValue = JSON.parse(jsonn);
+  let jsonn = JSON.stringify(json);
+  let jsonValue = JSON.parse(jsonn);
 
   console.log('step-1')
+  console.log("Json data:  ", jsonn);
 
-    addProduct(json);
+    addProduct(jsonn);
 
     console.log("json of string: ", jsonObject)
     console.log("json value: ", jsonVal)

@@ -1,0 +1,29 @@
+[{
+    "barcode": "1234567890",
+    "batchQuantity": 1000,
+    "category": "Fruits",
+    "componentProductIds": [],
+    "expirationDate": "2022-06-24T18:25:43.511Z",
+    "id": "1002",
+    "locationData": {
+        "current": {
+            "arrivalDate": "2021-07-07T01:11:18.409Z",
+            "location": "san fransisco, CA"
+        },
+        "previous": [
+            {
+                "arrivalDate": "2021-06-30T18:00:58.511Z",
+                "location": "Markham Farm, Marham, ON, Canada"
+            }
+        ]
+    },
+    "misc": "{}",
+    "name": "Apples",
+    "placeOfOrigin": "Markham, ON, Canada",
+    "productionDate": "2021-06-24T18:25:43.511Z",
+    "unitPrice": "$5.00",
+    "unitQuantity": 300,
+    "unitQuantityType": "mg",
+    "variety": null,
+    "componentProducts": []
+}]

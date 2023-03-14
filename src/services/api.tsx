@@ -21,8 +21,10 @@ async function getProductDetailsById(id:string) {
 }
 
 async function addProduct(payload:any) {
+  console.log("Json data:  ", payload);
  
   try {
+
     const response = await axios.post(`http://localhost:3003/createProduct`, payload);
     console.log(response);
   } catch (error) {
