@@ -55,11 +55,11 @@ function CreateProduct() {
 
      setFormVal(newRecord);
 
-
-
     //  Axios.post(url, {
 
     //  })
+
+    // JSON constant data....
 
     let json =  {
       barcode: "1234567890",
@@ -92,13 +92,9 @@ function CreateProduct() {
   }
 
   // let jsonn = JSON.stringify(json);
-
-
-
-
-  
-
   // let jsonValue = JSON.parse(jsonn);
+
+  console.log('step-1')
 
     addProduct(json);
 

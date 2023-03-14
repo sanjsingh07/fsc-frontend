@@ -13,7 +13,7 @@ async function getProductById(id:string) {
 
 async function getProductDetailsById(id:string) {
   try {
-    const response = await axios.get(baseURL+`/getProduct/?id=${id}`);
+    const response = await axios.get(`http://localhost:3003/getProduct?id=${id}`);
     console.log(response);
   } catch (error) {
     console.error(error);
