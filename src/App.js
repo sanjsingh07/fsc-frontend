@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateProduct from './createProduct/createProduct';
 import GetProductDetails from './getProductDetails/getProductDetails'
+import { Routes, Route } from 'react-router-dom';
 
 // import CreateProductt from './createProduct/createProductt'
 
@@ -8,7 +9,11 @@ import GetProductDetails from './getProductDetails/getProductDetails'
 function App() {
   return (
     <div className="App">
-     <CreateProduct/>
+     
+     <Routes>
+        <Route path="/GetProductDetails" element={<GetProductDetails />} />
+        <Route path="/" element={<CreateProduct/>} />
+      </Routes>
      {/* <GetProductDetails/> */}
    
       {/* <CreateProductt/> */}

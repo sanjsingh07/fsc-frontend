@@ -3,9 +3,12 @@ import './createProduct.css'
 import Axios from 'axios';
 import {addProduct} from '../services/api';
 import { validateHeaderName } from 'http';
+import { useNavigate } from 'react-router-dom';
 
 
 function CreateProduct() {
+  const navigate = useNavigate();
+
   const [formVal, setFormVal]= useState({
     
     barcode: "",
@@ -42,9 +45,12 @@ function CreateProduct() {
       if(failed) setFailed(false);
     }, 2000)
 
-    }, [Success,failed])
+  }, [Success,failed])
 
-
+  function handleClick(event:any) {
+    console.log("its triggering")
+    navigate('/GetProductDetails');
+  }
   
 
   const handleInput = (e: { target: { name: any; value:any }; }) => {
@@ -132,6 +138,7 @@ function CreateProduct() {
 
   return (
     <div className="sample">
+      <button type="button" onClick={handleClick}>Ship Product</button>
       <form action='' onSubmit={handleSubmit} >
       
         <div className='div1'>
