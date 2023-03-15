@@ -8,8 +8,8 @@ import GetProductDetails from './getProductDetails/getProductDetails'
 function App() {
   return (
     <div className="App">
-     {/* <CreateProduct/> */}
-     <GetProductDetails/>
+     <CreateProduct/>
+     {/* <GetProductDetails/> */}
    
       {/* <CreateProductt/> */}
   

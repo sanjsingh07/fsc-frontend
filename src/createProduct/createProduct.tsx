@@ -1,8 +1,8 @@
-import React from 'react';
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './createProduct.css'
 import Axios from 'axios';
 import {addProduct} from '../services/api';
+import { validateHeaderName } from 'http';
 
 
 function CreateProduct() {
@@ -29,6 +29,20 @@ function CreateProduct() {
   
   });
   // const [records, setRecords] = useState({})
+
+  const [Success, setSuccess] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if(Success) setSuccess(false);
+    }, 2500)
+
+    setTimeout(() => {
+      if(failed) setFailed(false);
+    }, 2000)
+
+    }, [Success,failed])
 
 
   
@@ -93,13 +107,25 @@ function CreateProduct() {
       componentProducts: [] || formVal.componentProducts
   }
 
-  let jsonn = JSON.stringify(json);
-  let jsonValue = JSON.parse(jsonn);
+  // let jsonn = JSON.stringify(json);
+  // let jsonValue = JSON.parse(jsonn);
 
-  console.log('step-1')
-  console.log("Json data:  ", jsonn);
+  // console.log('step-1')
+  // console.log("Json data:  ", jsonn);
+  // const result = addProduct(json);
+  // console.log("result: ",result);
 
-  addProduct(jsonn);
+
+  addProduct(json).then((value) => {
+    console.log("result: ",value);
+    if(value?.status == 200){
+      setSuccess(true)
+    }else{
+      setFailed(true)
+    }
+  });
+
+  
 
 
   }
@@ -183,6 +209,9 @@ function CreateProduct() {
         <br/>
 
         <button className='button-style' type='submit'>Submit</button>
+
+        {Success ? <span className="alert">Transction Executed Successfully!</span> : ''}
+        {failed ? <span className="alert">Transction Failed!</span> : ''}
 
       
 
