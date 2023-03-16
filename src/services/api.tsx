@@ -5,7 +5,7 @@ let baseURL: 'http://localhost:3003'
 async function getProductById(id:string) {
     try {
       // const response = await axios.get(`http://localhost:3003/getProductWithHistory/?id=${id}`);
-      const response = await axios.get(`http://192.168.29.92:3003/getProductWithHistory/?id=${id}`);
+      const response = await axios.get(`http://localhost:3003/getProductWithHistory/?id=${id}`);
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -14,7 +14,7 @@ async function getProductById(id:string) {
 
 async function getProductDetailsById(id:string) {
   try {
-    const response = await axios.get(`http://192.168.29.92:3003/getProduct?id=${id}`);
+    const response = await axios.get(`http://localhost:3003/getProduct?id=${id}`);
     console.log(response);
     return response;
   } catch (error) {
@@ -26,7 +26,7 @@ async function addProduct(payload:any) {
  
   try {
 
-    const response = await axios.post(`http://192.168.29.92:3003/createProduct`, payload);
+    const response = await axios.post(`http://localhost:3003/createProduct`, payload);
     console.log(response);
 
     return response;
@@ -40,7 +40,7 @@ async function addProduct(payload:any) {
 async function isIdExists(id:string) {
 
   try {
-    const response = await axios.get(`http://192.168.29.92:3003/productExists/?id=${id}`);
+    const response = await axios.get(`http://localhost:3003/productExists/?id=${id}`);
     console.log(response);
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ async function isIdExists(id:string) {
 
 async function shipProduct(payload:any) {
   try {
-    const response = await axios.post("http://192.168.29.92:3003/shipProduct",payload);
+    const response = await axios.post("http://localhost:3003/shipProduct",payload);
     console.log(response);
     return response;
   } catch (error) {
