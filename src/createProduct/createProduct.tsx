@@ -1,37 +1,45 @@
 import React, {useState, useEffect} from 'react'
 import './createProduct.css'
 import Axios from 'axios';
-import {addProduct} from '../services/api';
+import {addProduct, shipProduct} from '../services/api';
 import { validateHeaderName } from 'http';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 
 function CreateProduct() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // console.log("location data: ",location.state)
+
+  // if(location.state.id){
+  //   Object.entries(location.state).map(([key, value]) => {
+  //     console.log("key: ",key, "value: ",value)
+  //     // Pretty straightforward - use key for the key and value for the value.
+  //     // Just to clarify: unlike object destructuring, the parameter names don't matter here.
+  // })
+  // }
 
   const [formVal, setFormVal]= useState({
     
-    barcode: "",
-    batchQuantity:"",
-    category:"",
-    componentProductIds:"",
-    expirationDate:"",
-    id: 0,
-    locationData:"",
-    misc:"",
-    name:"",
-    placeOfOrigin:"",
-    productionDate:"",
-    unitPrice:"",
-    unitQuantity:0,
-    unitQuantityType:"",
-    variety:"",
-    componentProducts:"",
-
-  
+    barcode: location.state != null ?  location.state.barcode : "",
+    batchQuantity: location.state != null ? location.state.batchQuantity : "",
+    category: location.state != null ? location.state.category : "",
+    componentProductIds: location.state != null ? location.state.componentProductIds : "",
+    expirationDate: location.state != null ? location.state.expirationDate : "",
+    id: location.state != null ? location.state.id : 0,
+    locationData: location.state != null ? location.state.locationData.current.location : "",
+    misc: location.state != null ? location.state.misc : "",
+    name: location.state != null ? location.state.name : "",
+    placeOfOrigin: location.state != null ? location.state.placeOfOrigin : "",
+    productionDate: location.state != null ? location.state.productionDate : "",
+    unitPrice: location.state != null ? location.state.unitPrice : "",
+    unitQuantity:location.state != null ?  location.state.unitQuantity : 0,
+    unitQuantityType:location.state != null ? location.state.unitQuantityType : "",
+    variety: location.state != null ? location.state.variety : null,
+    componentProducts:location.state != null ? location.state.componentProducts : [],
   
   });
-  // const [records, setRecords] = useState({})
 
   const [Success, setSuccess] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -43,13 +51,55 @@ function CreateProduct() {
 
     setTimeout(() => {
       if(failed) setFailed(false);
-    }, 2000)
+    }, 2500)
 
   }, [Success,failed])
 
   function handleClick(event:any) {
-    console.log("its triggering")
     navigate('/GetProductDetails');
+  }  
+
+  function shipProductFn(event:any) {
+
+    let json =  {
+      barcode: formVal.barcode,
+      batchQuantity: formVal.batchQuantity,
+      category: formVal.category,
+      componentProductIds: [] || formVal.componentProductIds,
+      expirationDate: formVal.expirationDate ? formVal.expirationDate.toString() : "2022-06-24T18:25:43.511Z",
+      id: formVal.id,
+      locationData: {
+          current: {
+              arrivalDate: new Date().getTime().toString(),
+              location: formVal.locationData
+          },
+          previous: [
+              {
+                  arrivalDate: "2021-06-30T18:00:58.511Z",
+                  location: "Markham Farm, Marham, ON, Canada"
+              }
+          ]
+      },
+      misc: "{}" || formVal.misc,
+      name: formVal.name,
+      placeOfOrigin: formVal.placeOfOrigin,
+      productionDate: formVal.productionDate ? formVal.productionDate : "2021-06-24T18:25:43.511Z",
+      unitPrice: "$" + formVal.unitPrice,
+      unitQuantity:  formVal.unitQuantity,
+      unitQuantityType: formVal.unitQuantityType,
+      variety: null || formVal.variety,
+      componentProducts: [] || formVal.componentProducts
+  }
+    console.log("printing just b4: ship ", json)
+    shipProduct(json).then((value) => {
+      console.log("result: ",value);
+      if(value?.status == 200){
+        setSuccess(true)
+      }else{
+        setFailed(true)
+      }
+    });
+    // navigate('/GetProductDetails');
   }
   
 
@@ -59,27 +109,11 @@ function CreateProduct() {
    
 
     setFormVal({...formVal, [name]: value});
-    // console.log(name, value)
 
   }
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    const newRecord = {...formVal, id :  new Date().getTime().toString()} 
-
-    //  console.log(newRecord);
-
-     const jsonObject = JSON.stringify(newRecord);
-     const jsonVal = JSON.parse(jsonObject)
-     
-
-    //  setFormVal(newRecord);
-
-    //  Axios.post(url, {
-
-    //  })
-
-    // JSON constant data....
+    e.preventDefault();     
 
     let previousData;
 
@@ -106,7 +140,7 @@ function CreateProduct() {
       name: formVal.name,
       placeOfOrigin: formVal.placeOfOrigin,
       productionDate: "2021-06-24T18:25:43.511Z" || formVal.productionDate,
-      unitPrice: "$5.00" || formVal.unitPrice,
+      unitPrice: "$" + formVal.unitPrice,
       unitQuantity:  formVal.unitQuantity,
       unitQuantityType: formVal.unitQuantityType,
       variety: null || formVal.variety,
@@ -131,14 +165,12 @@ function CreateProduct() {
     }
   });
 
-  
-
 
   }
 
   return (
     <div className="sample">
-      <button type="button" onClick={handleClick}>Ship Product</button>
+      <button type="button" onClick={handleClick}>Get Product</button>
       <form action='' onSubmit={handleSubmit} >
       
         <div className='div1'>
@@ -215,8 +247,11 @@ function CreateProduct() {
 
         <br/>
 
-        <button className='button-style' type='submit'>Submit</button>
+        
 
+        { location.state ? <button type="button" className='button-style' onClick={shipProductFn}>Ship Product</button> : <button className='button-style' type='submit'>Submit</button>}
+
+        
         {Success ? <span className="alert">Transction Executed Successfully!</span> : ''}
         {failed ? <span className="alert">Transction Failed!</span> : ''}
 
